@@ -1,0 +1,23 @@
+import requests
+import matplotlib.pyplot as plt
+
+# Get Ethereum price data from CoinGecko API
+url = "https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=30"
+response = requests.get(url)
+data = response.json()
+
+# Extract timestamps and prices
+timestamps = data["prices"]
+dates = [timestamp[0] for timestamp in timestamps]
+prices = [timestamp[1] for timestamp in timestamps]
+
+# Plotting the Ethereum chart
+plt.plot(dates, prices)
+plt.title("Ethereum Price Chart")
+plt.xlabel("Date")
+plt.ylabel("Price (USD)")
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Display the chart
+plt.show()
